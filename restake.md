@@ -6,7 +6,7 @@ ____
 #### What we'll be doing, briefly
 Docker    
 Config    
-Pull request    
+Submit operator    
 ____
 
 ### Upgrade packages
@@ -101,7 +101,46 @@ docker-compose build --no-cache
 
 #### There are 2 local config files
 - $HOME/restake/src/networks.json
-- $HOME/restake/src/networks.local.json - which will override a config in 'networks.json' if you need to
+- $HOME/restake/src/networks.local.json - which will override a config in 'networks.json' if you need to    
+> Example of the `networks.local.json`
+```JSON
+{
+  "empowerchain": {
+    "prettyName": "EmpowerChain",
+    "restUrl": [
+      "https://empower-api.polkachu.com"
+    ],
+    "gasPrice": "0.025umpwr",
+    "autostake": {
+      "retries": 3,
+      "batchPageSize": 25,
+      "batchQueries": 20,
+      "batchTxs": 25,
+      "delegationsTimeout": 20000,
+      "queryTimeout": 5000,
+      "queryThrottle": 100,
+      "gasModifier": 1.2
+    }
+  }
+}
+```
+> Comments
+```JSON
+"empowerchain": { // Network name
+"prettyName": "EmpowerChain", // Network's user-friendly name
+"restUrl": // REST API URL for the network
+"gasPrice": // Standard gas price for transactions in this network
+"retries": // Number of attempts the script will make when performing an operation
+"batchPageSize": // Number of delegates to be processed at once
+"batchQueries": // Number of queries to be executed at once
+"batchTxs": // Number of transactions to be sent at once
+"delegationsTimeout": // Timeout (in milliseconds) for delegation queries
+"queryTimeout": // Timeout (in milliseconds) for other queries
+"queryThrottle": // Delay (in milliseconds) between queries
+"gasModifier": // Modifier to be applied to the standard gas price
+```
+
+####
 
 #### The base command for using with docker-compose is
 ```
@@ -115,7 +154,80 @@ crontab -e
 0 8 * * * cd restake && docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
 ```
 
-#### Check logs
+#### Checking logs
 ```
 tail -f -n 100 $HOME/restake.log
+```
+
+### Submitting
+#### Update the validator registry to add your operator information to all chains for which you have set up REStake
+Fork https://github.com/eco-stake/validator-registry.
+You should create 2 files, chains.json and profile.json. You can find an examples of these files in other validators in the registry.
+#### profile.json
+```
+{
+  "$schema": "../profile.schema.json",
+  "name": "xAlex",
+  "identity": "224B4B470642E35E"
+}
+```
+#### chains.json
+For one chain it looks like this:
+```
+{
+  "$schema": "../chains.schema.json",
+  "name": "xAlex",
+  "chains": [    
+    {
+      "name": "empowerchain",
+      "address": "empowervaloper1eu44mtweaap45ytv6hgtkahhmkdlx9rlk0py42",
+			"restake": {
+			  "address": "empower1jyhp2zcr8dd62gq3rtxse6mw4wypkej7lcl8s6",
+			  "run_time": ["every 1 hour"],
+			  "minimum_reward": 1000000
+			}
+		}
+	]
+}
+```
+
+
+#### 
+```
+
+```
+
+#### 
+```
+
+```
+
+#### 
+```
+
+```
+
+#### 
+```
+
+```
+
+#### 
+```
+
+```
+
+#### 
+```
+
+```
+
+#### 
+```
+
+```
+
+#### 
+```
+
 ```
