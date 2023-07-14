@@ -7,14 +7,14 @@ ____
 Docker    
 Config    
 Submit operator    
-____
 
-### Upgrade packages
+#
+
+### Install Docker
+#### Upgrade packages
 ```
 sudo apt update && sudo apt upgrade
 ```
-
-### Install Docker
 #### Add the GPG key to the system for the official Docker repository 
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o docker.gpg
@@ -72,6 +72,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 docker-compose --version
 ```
+
+#
 
 ### REStake configuration
 #### Clone restake repo
@@ -140,7 +142,7 @@ docker-compose build --no-cache
 "gasModifier": // Modifier to be applied to the standard gas price
 ```
 
-####
+> There is also `networks.local.json.sample` in the $HOME/restake/src/
 
 #### The base command for using with docker-compose is
 ```
@@ -159,11 +161,13 @@ crontab -e
 tail -f -n 100 $HOME/restake.log
 ```
 
+#
+
 ### Submitting
 #### Update the validator registry to add your operator information to all chains for which you have set up REStake
 Fork https://github.com/eco-stake/validator-registry.
-You should create 2 files, chains.json and profile.json. You can find an examples of these files in other validators in the registry.
-#### profile.json
+You should create 2 files, `chains.json` and `profile.json`. You can find an examples at other validators in the registry.
+> #### profile.json example
 ```
 {
   "$schema": "../profile.schema.json",
@@ -171,8 +175,7 @@ You should create 2 files, chains.json and profile.json. You can find an example
   "identity": "224B4B470642E35E"
 }
 ```
-#### chains.json
-For one chain it looks like this:
+> #### chains.json example
 ```
 {
   "$schema": "../chains.schema.json",
@@ -190,7 +193,17 @@ For one chain it looks like this:
 	]
 }
 ```
-
+> #### comments
+```
+"name": // validator moniker
+"chains": // chains you configuring for REStake
+"name": // the name of the chain
+"address": // your validator's address in this chain
+"restake":
+ "address": // address from your new wallet you generated earlier for the restake transactions
+ "run_time": // time in UTC or interval string that you intend to run your bot
+ "minimum_reward": // minimum reward to trigger autostaking, skipping else
+```
 
 #### 
 ```
