@@ -99,25 +99,23 @@ docker-compose run --rm app npm install
 docker-compose build --no-cache
 ```
 
-### There are 2 local config files
+#### There are 2 local config files
 - $HOME/restake/src/networks.json
-- $HOME/restake/src/networks.local.json
+- $HOME/restake/src/networks.local.json - which will override a config in 'networks.json' if you need to
 
+#### The base command for using with docker-compose is
+```
+docker-compose run --rm app npm run autostake
 ```
 
+#### You should configure crontab or systemd to run restake periodically
+For example, crontab, every day at 08:00
+```
+crontab -e
+0 8 * * * cd restake && docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
 ```
 
-###
+#### Check logs
 ```
-
-```
-
-###
-```
-
-```
-
-###
-```
-
+tail -f -n 100 $HOME/restake.log
 ```
