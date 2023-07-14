@@ -103,8 +103,9 @@ docker-compose build --no-cache
 
 #### There are 2 local config files
 - $HOME/restake/src/networks.json
-- $HOME/restake/src/networks.local.json - which will override a config in 'networks.json' if you need to    
-> Example of the `networks.local.json`
+- $HOME/restake/src/networks.local.json - which will override a config in `networks.json` if you need to. You can check `networks.local.json.sample` example in $HOME/restake/src/     
+
+My `networks.local.json` working file:
 ```JSON
 {
   "empowerchain": {
@@ -141,8 +142,6 @@ docker-compose build --no-cache
 "queryThrottle": // Delay (in milliseconds) between queries
 "gasModifier": // Modifier to be applied to the standard gas price
 ```
-
-> There is also `networks.local.json.sample` in the $HOME/restake/src/
 
 #### The base command for using with docker-compose is
 ```
