@@ -170,6 +170,10 @@ crontab -e
 > ```
 > sudo usermod -aG docker $USER
 > ```
+> For the changes to take effect 
+> ```
+> su - $USER
+> ```
 > Command line in crontab
 > ```
 > 0 * * * * cd ~/restake && /usr/local/bin/docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
