@@ -159,12 +159,21 @@ docker-compose run --rm app npm run autostake
 ```
 
 #### You should configure crontab or systemd to run restake periodically
-For example, crontab, at the beginning of each hour
+As a example here `crontab` job, at the beginning of each hour. (Visit https://crontab.guru if you need help with sample crontab jobs)
 ```
 crontab -e
+```
+```
 0 * * * * cd restake && docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
 ```
-> Visit https://crontab.guru if you need help with sample crontab jobs
+> If you run crontab under the sudo user, add him to the group docker
+> ```
+> sudo usermod -aG docker $USER
+> ```
+> Command line in crontab
+> ```
+> 0 * * * * cd ~/restake && /usr/local/bin/docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
+> ```
 
 #### Checking logs
 ```
