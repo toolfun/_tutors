@@ -107,6 +107,14 @@ nano $HOME/restake/.env
 - `$HOME/restake/src/networks.json`
 - `$HOME/restake/src/networks.local.json` - which will override a config in `networks.json` if you need to. You can check `networks.local.json.sample` example in $HOME/restake/src/     
 
+`networks.json` there are examples, you can override it. My `networks.json` working file for only empowerchain:
+```JSON
+[
+  {
+    "name": "empowerchain"
+  }
+]
+```
 My `networks.local.json` working file:
 ```JSON
 {
