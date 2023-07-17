@@ -55,6 +55,8 @@ sudo apt install docker-ce
 sudo systemctl status docker
 ```
 
+#
+
 ### Install Docker Compose
 Go to https://github.com/docker/compose/releases for the last release version    
 I'll use docker-compose version 2.20.0
@@ -94,16 +96,16 @@ Keep enough funds for transaction fees on this wallet
 nano $HOME/restake/.env
 ```
 
-#### Updates are happening all the time so updating
-```
-git pull
-docker-compose run --rm app npm install
-docker-compose build --no-cache
-```
+> #### Updates are happening all the time so this command for updating
+> ```
+> git pull
+> docker-compose run --rm app npm install
+> docker-compose build --no-cache
+> ```
 
 #### There are 2 local config files
-- $HOME/restake/src/networks.json
-- $HOME/restake/src/networks.local.json - which will override a config in `networks.json` if you need to. You can check `networks.local.json.sample` example in $HOME/restake/src/     
+- `$HOME/restake/src/networks.json`
+- `$HOME/restake/src/networks.local.json` - which will override a config in `networks.json` if you need to. You can check `networks.local.json.sample` example in $HOME/restake/src/     
 
 My `networks.local.json` working file:
 ```JSON
@@ -116,9 +118,9 @@ My `networks.local.json` working file:
     "gasPrice": "0.025umpwr",
     "autostake": {
       "retries": 3,
-      "batchPageSize": 25,
+      "batchPageSize": 100,
       "batchQueries": 20,
-      "batchTxs": 25,
+      "batchTxs": 50,
       "delegationsTimeout": 20000,
       "queryTimeout": 5000,
       "queryThrottle": 100,
@@ -149,10 +151,10 @@ docker-compose run --rm app npm run autostake
 ```
 
 #### You should configure crontab or systemd to run restake periodically
-For example, crontab, every day at 08:00
+For example, crontab, at the beginning of each hour
 ```
 crontab -e
-0 8 * * * cd restake && docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
+0 * * * * cd restake && docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
 ```
 
 #### Checking logs
@@ -193,14 +195,14 @@ You should create 2 files, `chains.json` and `profile.json`. You can find an exa
 }
 ```
 > #### comments
-```
+```JSON
 "name": // validator moniker
 "chains": // chains you configuring for REStake
 "name": // the name of the chain
 "address": // your validator's address in this chain
 "restake":
  "address": // address from your new wallet you generated earlier for the restake transactions
- "run_time": // time in UTC or interval string that you intend to run your bot
+ "run_time": // time in UTC or interval string ( e.g. "every 15 minutes") that you intend to run your bot
  "minimum_reward": // minimum reward to trigger autostaking, skipping else
 ```
 
@@ -209,37 +211,4 @@ You should create 2 files, `chains.json` and `profile.json`. You can find an exa
 
 ```
 
-#### 
-```
 
-```
-
-#### 
-```
-
-```
-
-#### 
-```
-
-```
-
-#### 
-```
-
-```
-
-#### 
-```
-
-```
-
-#### 
-```
-
-```
-
-#### 
-```
-
-```
