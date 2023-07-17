@@ -156,6 +156,7 @@ For example, crontab, at the beginning of each hour
 crontab -e
 0 * * * * cd restake && docker-compose run --rm app npm run autostake >> ./restake.log 2>&1
 ```
+> Visit https://crontab.guru if you need help with sample crontab jobs
 
 #### Checking logs
 ```
