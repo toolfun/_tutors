@@ -75,6 +75,13 @@ sudo chmod +x /usr/local/bin/docker-compose
 docker-compose --version
 ```
 
+### Adding a user to group docker
+For not root users
+```
+sudo usermod -aG docker $USER
+```
+Then restart your session (log out and log in again), or restart the terminal for the changes to take effect
+
 #
 
 ### REStake configuration
